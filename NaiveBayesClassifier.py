@@ -3,7 +3,7 @@ import copy
 import csv
 import numpy as np
 
-dataset_path = '../datasets/pima-indians-diabetes.csv'
+dataset_path = '../datasets/digits.csv'
 split_ratio = 1
 
 class NaiveBayes(object):
@@ -59,9 +59,9 @@ class NaiveBayes(object):
         return np.where(prob == np.amax(prob))[0][0]
 
     def predict(self):
+        pos = 0
         self.prior_prob()
         self.freq_table()
-        pos = 0
         for row in self.test_set:
             predicted = self.bayes(row[0:-1])
             #print("Original: {0}, Predicted: {1}".format(row[-1], predicted))
@@ -71,7 +71,7 @@ class NaiveBayes(object):
         self.accuracy = (100*pos)/len(self.test_set)
 
 def main():
-    model = NaiveBayes(dataset_path, 67)
+    model = NaiveBayes(dataset_path, 80)
     model.load_dataset()
     model.split_dataset()
     print("Train_Set len: {0}, Test_Set len: {1}".format(len(model.train_set), len(model.test_set)))
